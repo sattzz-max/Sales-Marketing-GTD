@@ -1,0 +1,10 @@
+@extends('layouts.app')
+@section('content')
+@include('partials.hero')
+@include('partials.department-overview')
+@include('partials.services')
+@include('partials.sales-team')
+@include('partials.event-carousel')
+@include('partials.gallery')
+@include('partials.contact-cta')
+@endsection
