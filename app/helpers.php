@@ -74,6 +74,10 @@ function store_image(?UploadedFile $f, string $dir): ?string {
   $tmp = $f->getRealPath(); $mime = (new finfo(FILEINFO_MIME_TYPE))->file($tmp);
   $ext = ['image/jpeg'=>'jpg','image/png'=>'png','image/webp'=>'webp'][$mime] ?? null;
   if (!$ext || !@getimagesize($tmp)) throw new RuntimeException('Hanya JPG, PNG, atau WebP yang diizinkan.');
+  $targetDir = public_path("assets/images/$dir");
+  if (!is_dir($targetDir)) {
+    @mkdir($targetDir, 0755, true);
+  }
   $rel = "assets/images/$dir/".bin2hex(random_bytes(10));
   if (function_exists('imagewebp')) {
     $im = match ($mime) { 'image/jpeg'=>@imagecreatefromjpeg($tmp), 'image/png'=>@imagecreatefrompng($tmp), default=>@imagecreatefromwebp($tmp) };
