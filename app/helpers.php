@@ -43,14 +43,82 @@ function get_team(): array {
   return rows("SELECT name,position,photo,whatsapp,email FROM team_members WHERE is_active=1 ORDER BY sort_order,id LIMIT 8", $f);
 }
 function get_events(): array {
-  $f = []; for ($i=1;$i<=8;$i++) { $n = sprintf('%02d',$i); $f[] = ['title'=>'[NAMA_EVENT]','event_date'=>'[TANGGAL_EVENT]','category'=>'[KATEGORI_EVENT]','cover'=>"assets/images/events/event-$n.jpg",'description'=>'[DESKRIPSI_EVENT]','link'=>'','placeholder'=>1,'slot'=>"FOTO_EVENT_$n"]; }
+  $f = [
+    [
+      'title' => 'Taman Dayu Annual Golf Championship',
+      'event_date' => '24 Nov 2026',
+      'category' => 'Tournament',
+      'cover' => 'assets/images/events/event-01.jpg',
+      'description' => 'Turnamen golf tahunan bergengsi 18 hole dengan peserta dari berbagai komunitas golf ternama di Indonesia.',
+      'link' => '',
+      'upcoming' => 1,
+      'slot' => 'FOTO_EVENT_01'
+    ],
+    [
+      'title' => 'Corporate Executive Golf & Gala Dinner',
+      'event_date' => '12 Des 2026',
+      'category' => 'Corporate',
+      'cover' => 'assets/images/events/event-02.jpg',
+      'description' => 'Sesi networking eksklusif para eksekutif dan mitra korporat yang dipadukan dengan gala dinner di Clubhouse.',
+      'link' => '',
+      'upcoming' => 1,
+      'slot' => 'FOTO_EVENT_02'
+    ],
+    [
+      'title' => 'Junior & Amateur Golf Coaching Clinic',
+      'event_date' => '18 Okt 2026',
+      'category' => 'Clinic',
+      'cover' => 'assets/images/events/event-03.jpg',
+      'description' => 'Pelatihan teknik swing dan putting intensif bersama pelatih bersertifikasi PGA untuk pemain muda.',
+      'link' => '',
+      'upcoming' => 0,
+      'slot' => 'FOTO_EVENT_03'
+    ],
+    [
+      'title' => 'Sunset Terrace Networking & Wine Evening',
+      'event_date' => '05 Sep 2026',
+      'category' => 'Social Event',
+      'cover' => 'assets/images/events/event-04.jpg',
+      'description' => 'Suasana santai sore hari menikmati panorama pegunungan dengan hidangan wine & barbecue di Veranda.',
+      'link' => '',
+      'upcoming' => 0,
+      'slot' => 'FOTO_EVENT_04'
+    ],
+    [
+      'title' => 'Charity Golf Invitational & Awarding',
+      'event_date' => '22 Agu 2026',
+      'category' => 'Charity',
+      'cover' => 'assets/images/events/event-05.jpg',
+      'description' => 'Ajang golf amal untuk mendukung pelestarian alam kawasan lereng Gunung Welirang dan komunitas sekitar.',
+      'link' => '',
+      'upcoming' => 0,
+      'slot' => 'FOTO_EVENT_05'
+    ],
+    [
+      'title' => 'Weekend Scramble Fun Match',
+      'event_date' => '11 Jul 2026',
+      'category' => 'Community',
+      'cover' => 'assets/images/events/event-06.jpg',
+      'description' => 'Pertandingan santai akhir pekan sistem Texas Scramble yang ramah pemula dan penuh kebersamaan.',
+      'link' => '',
+      'upcoming' => 0,
+      'slot' => 'FOTO_EVENT_06'
+    ]
+  ];
   $r = rows("SELECT title,event_date,category,cover,description,link FROM events WHERE is_published=1 ORDER BY sort_order,event_date DESC", []);
   if (!$r) return $f;
   return array_map(function ($e) { $t = $e['event_date'] ? strtotime($e['event_date']) : false;
     $e['upcoming'] = $t && $t >= strtotime('today') ? 1 : 0; $e['event_date'] = $t ? date('d M Y', $t) : ''; return $e; }, $r);
 }
 function get_gallery(): array {
-  $f = []; for ($i=1;$i<=6;$i++) { $n = sprintf('%02d',$i); $f[] = ['photo'=>"assets/images/gallery/gallery-$n.jpg",'caption'=>'[KETERANGAN_FOTO]','placeholder'=>1,'slot'=>"FOTO_GALERI_$n"]; }
+  $f = [
+    ['photo'=>'assets/images/gallery/gallery-01.jpg', 'caption'=>'18-Hole Championship Course designed by Jack Nicklaus', 'placeholder'=>0, 'slot'=>'FOTO_GALERI_01'],
+    ['photo'=>'assets/images/gallery/gallery-02.jpg', 'caption'=>'Hillside Luxury Resort Pool & Mountain View', 'placeholder'=>0, 'slot'=>'FOTO_GALERI_02'],
+    ['photo'=>'assets/images/gallery/gallery-03.jpg', 'caption'=>'Clubhouse Veranda & Fine Dining Terrace', 'placeholder'=>0, 'slot'=>'FOTO_GALERI_03'],
+    ['photo'=>'assets/images/gallery/gallery-04.jpg', 'caption'=>'Sunset Glow along Fairway Hole 14', 'placeholder'=>0, 'slot'=>'FOTO_GALERI_04'],
+    ['photo'=>'assets/images/gallery/gallery-05.jpg', 'caption'=>'Private Villa Suite & Exclusive Staycation', 'placeholder'=>0, 'slot'=>'FOTO_GALERI_05'],
+    ['photo'=>'assets/images/gallery/gallery-06.jpg', 'caption'=>'Pristine Putting Green with Panoramic Skyline', 'placeholder'=>0, 'slot'=>'FOTO_GALERI_06'],
+  ];
   return rows("SELECT photo,caption FROM gallery_items WHERE is_published=1 ORDER BY sort_order,id", $f);
 }
 function photo(array $r, string $key, string $alt, string $slot): string {
@@ -59,6 +127,8 @@ function photo(array $r, string $key, string $alt, string $slot): string {
 }
 function logo_html(bool $light=false): string {
   if ($l = img(settings()['logo'] ?? null)) return '<img class="logo-img" src="'.e($l).'" alt="Taman Dayu Golf Club &amp; Resort" height="44">';
+  $def = $light ? 'assets/images/logo-light.svg' : 'assets/images/logo.svg';
+  if ($s = img($def)) return '<img class="logo-img" src="'.e($s).'" alt="Taman Dayu Golf Club &amp; Resort" height="44">';
   return '<span class="logo-ph'.($light ? ' light' : '').'">[LOGO TAMAN DAYU]</span>';
 }
 function video_embed(?string $u): ?array {

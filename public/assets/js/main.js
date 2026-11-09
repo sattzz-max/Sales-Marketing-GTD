@@ -4,10 +4,41 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 document.addEventListener('click',e=>{const t=e.target.closest('[data-track]');if(t&&t.dataset.track&&window.dataLayer)window.dataLayer.push({event:'td_click',label:t.dataset.track});});
 const hd=$('.site-header'),nav=$('#nav'),bg=$('.burger');
 addEventListener('scroll',()=>hd.classList.toggle('stuck',scrollY>10),{passive:true});
-bg.addEventListener('click',()=>{const o=nav.classList.toggle('open');bg.setAttribute('aria-expanded',o);});
-$$('#nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');bg.setAttribute('aria-expanded',false);}));
+
+// Hamburger menu toggle with smooth slide down & smooth scroll
+if(bg && nav){
+  bg.addEventListener('click',e=>{
+    e.stopPropagation();
+    const isOpen = nav.classList.toggle('open');
+    bg.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  $$('#nav a').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const href = a.getAttribute('href');
+      if(href && href.startsWith('#') && href.length > 1){
+        const target = $(href);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+          history.pushState(null,'',href);
+        }
+      }
+      nav.classList.remove('open');
+      bg.setAttribute('aria-expanded','false');
+    });
+  });
+
+  document.addEventListener('click',e=>{
+    if(nav.classList.contains('open') && !nav.contains(e.target) && !bg.contains(e.target)){
+      nav.classList.remove('open');
+      bg.setAttribute('aria-expanded','false');
+    }
+  });
+}
+
 const links=$$('#nav a[href^="#"]');
-const so=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const id=en.target.id==='services'?'about':en.target.id==='gallery'?'events':en.target.id;links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}}),{rootMargin:'-45% 0px -50% 0px'});
+const so=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const id=en.target.id==='gallery'?'events':en.target.id;links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}}),{rootMargin:'-40% 0px -50% 0px'});
 $$('main section[id]').forEach(s=>so.observe(s));
 const ro=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');ro.unobserve(en.target);}}),{threshold:.12});
 $$('.reveal').forEach(r=>ro.observe(r));
@@ -47,6 +78,59 @@ if(f){const st=$('.status',f);f.addEventListener('submit',async e=>{e.preventDef
   if(j.ok){f.reset();window.dataLayer&&window.dataLayer.push({event:'td_inquiry_success'});}
  }catch(x){st.textContent='Koneksi gagal. Data Anda belum terkirim; coba lagi.';st.classList.add('err');}
  btn.disabled=false;});}
+// Hero photo slideshow — full-bleed auto-rotate every 4.5 s
+(()=>{
+  const heroEl=$('.hero');
+  if(!heroEl)return;
+  const slides=$$('.hero-slide',heroEl);
+  const dots  =$$('.hero-dot',heroEl);
+  const currEl=$('.counter-curr',heroEl);
+  if(!slides.length)return;
+  let cur=0,timer;
+
+  const go=n=>{
+    slides[cur].classList.remove('active');
+    if(dots[cur]){
+      dots[cur].classList.remove('active');
+      dots[cur].setAttribute('aria-selected','false');
+    }
+    cur=(n+slides.length)%slides.length;
+    slides[cur].classList.add('active');
+    if(dots[cur]){
+      dots[cur].classList.add('active');
+      dots[cur].setAttribute('aria-selected','true');
+    }
+    if(currEl){
+      currEl.textContent=String(cur+1).padStart(2,'0');
+    }
+  };
+
+  const play=()=>{
+    clearInterval(timer);
+    timer=setInterval(()=>go(cur+1),4500);
+  };
+
+  // Manual dot navigation
+  dots.forEach((d,i)=>d.addEventListener('click',()=>{
+    go(i);
+    play();
+  }));
+
+  // Touch swipe on mobile
+  let sx=null;
+  heroEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  heroEl.addEventListener('touchend',e=>{
+    if(sx===null)return;
+    const d=e.changedTouches[0].clientX-sx;
+    if(Math.abs(d)>40){
+      go(cur+(d<0?1:-1));
+      play();
+    }
+    sx=null;
+  });
+
+  play();
+})();
 // Modal video (konten dimuat hanya saat dibuka, dibuang saat ditutup)
 const vm=$('#vmodal');
 if(vm){const box=$('.vbox',vm);let last=null;

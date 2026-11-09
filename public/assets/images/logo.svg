@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none">
+  <!-- Crest Emblem -->
+  <g transform="translate(6, 6)">
+    <!-- Outer Shield / Diamond -->
+    <path d="M26 2 L48 24 L26 50 L4 24 Z" stroke="#B69A64" stroke-width="1.8" fill="rgba(24,61,48,0.95)" stroke-linejoin="round"/>
+    <!-- Inner Accent -->
+    <path d="M26 7 L43 24 L26 44 L9 24 Z" stroke="#B69A64" stroke-width="0.8" opacity="0.6"/>
+    <!-- Pine Tree & Mountain Crest -->
+    <path d="M26 12 L31 22 L28 22 L33 31 L19 31 L24 22 L21 22 Z" fill="#B69A64"/>
+    <!-- Golf Flag / Ball dot -->
+    <circle cx="26" cy="37" r="2.2" fill="#FFFFFF"/>
+    <!-- Star at crest top -->
+    <polygon points="26,1 27.5,4 30.5,4.5 28,6.8 28.8,9.8 26,8.2 23.2,9.8 24,6.8 21.5,4.5 24.5,4" fill="#B69A64" transform="scale(0.55) translate(21, -3)"/>
+  </g>
+
+  <!-- Typography -->
+  <!-- "TAMAN DAYU" -->
+  <text x="68" y="32" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="20" font-weight="700" letter-spacing="0.14em" fill="#183D30" class="logo-text-primary">TAMAN DAYU</text>
+  <!-- Gold Accent Line -->
+  <line x1="68" y1="39" x2="265" y2="39" stroke="#B69A64" stroke-width="1.2" opacity="0.75"/>
+  <!-- Subtitle -->
+  <text x="68" y="51" font-family="'Manrope', system-ui, sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.28em" fill="#B69A64" class="logo-text-secondary">GOLF CLUB &amp; RESORT</text>
+</svg>
+
