@@ -183,6 +183,8 @@ return [
         ['photo'=>'assets/images/gallery/gallery-04.jpg', 'caption'=>'Sunset Glow along Fairway Hole 14'],
         ['photo'=>'assets/images/gallery/gallery-05.jpg', 'caption'=>'Private Villa Suite & Exclusive Staycation'],
         ['photo'=>'assets/images/gallery/gallery-06.jpg', 'caption'=>'Pristine Putting Green with Panoramic Skyline'],
+        ['photo'=>'assets/images/gallery/gallery-07.jpg', 'caption'=>'Hillside Tropical Garden & Villa Grounds'],
+        ['photo'=>'assets/images/gallery/gallery-08.jpg', 'caption'=>'Golden Sunrise over Championship Fairway & Mountain Peak'],
       ]
     ],
     'contact' => [
@@ -393,6 +395,8 @@ return [
         ['photo'=>'assets/images/gallery/gallery-04.jpg', 'caption'=>'Kilau Senja di Fairway Hole 14'],
         ['photo'=>'assets/images/gallery/gallery-05.jpg', 'caption'=>'Suite Villa Privat & Staycation Eksklusif'],
         ['photo'=>'assets/images/gallery/gallery-06.jpg', 'caption'=>'Putting Green Asri dengan Panorama Cakrawala'],
+        ['photo'=>'assets/images/gallery/gallery-07.jpg', 'caption'=>'Taman Tropis Asri & Lanskap Villa Perbukitan'],
+        ['photo'=>'assets/images/gallery/gallery-08.jpg', 'caption'=>'Kemilau Fajar di Lapangan Golf & Puncak Gunung'],
       ]
     ],
     'contact' => [
