@@ -127,6 +127,8 @@ function photo(array $r, string $key, string $alt, string $slot): string {
 }
 function logo_html(bool $light=false): string {
   if ($l = img(settings()['logo'] ?? null)) return '<img class="logo-img" src="'.e($l).'" alt="Taman Dayu Golf Club &amp; Resort" height="44">';
+  $png = $light ? 'assets/images/logo-light.png' : 'assets/images/logo.png';
+  if ($s = img($png)) return '<img class="logo-img" src="'.e($s).'" alt="Taman Dayu Golf Club &amp; Resort" height="44">';
   $def = $light ? 'assets/images/logo-light.svg' : 'assets/images/logo.svg';
   if ($s = img($def)) return '<img class="logo-img" src="'.e($s).'" alt="Taman Dayu Golf Club &amp; Resort" height="44">';
   return '<span class="logo-ph'.($light ? ' light' : '').'">[LOGO TAMAN DAYU]</span>';
