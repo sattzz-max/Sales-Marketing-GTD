@@ -76,5 +76,8 @@
     </div>
   </div>
 
+  {{-- Ultra-smooth bottom transition blend (melts dark hero scenery into section background) --}}
+  <div class="hero-bottom-blend" aria-hidden="true"></div>
+
   <a class="scroll-ind" href="#about" aria-label="<?= e($t['hero']['scroll']) ?>"></a>
 </section>
