@@ -111,6 +111,13 @@ return [
           'email'    => 'stephanie.tan@tamandayu.com',
           'photo'    => 'assets/images/team/team-04.jpg'
         ],
+        [
+          'name'     => 'Nadia Salsabila',
+          'position' => 'Resort Staycation & Banquet Specialist',
+          'whatsapp' => '081234567894',
+          'email'    => 'nadia.salsabila@tamandayu.com',
+          'photo'    => 'assets/images/team/team-05.jpg'
+        ],
       ]
     ],
     'events' => [
@@ -322,6 +329,13 @@ return [
           'whatsapp' => '081234567893',
           'email'    => 'stephanie.tan@tamandayu.com',
           'photo'    => 'assets/images/team/team-04.jpg'
+        ],
+        [
+          'name'     => 'Nadia Salsabila',
+          'position' => 'Resort Staycation & Banquet Specialist',
+          'whatsapp' => '081234567894',
+          'email'    => 'nadia.salsabila@tamandayu.com',
+          'photo'    => 'assets/images/team/team-05.jpg'
         ],
       ]
     ],

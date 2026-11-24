@@ -48,6 +48,7 @@ class PageController extends Controller {
       if (!empty($cfgTim[$idx]['whatsapp'])) $tm['whatsapp'] = $cfgTim[$idx]['whatsapp'];
       if (!empty($cfgTim[$idx]['email']))    $tm['email']    = $cfgTim[$idx]['email'];
       if (!empty($cfgTim[$idx]['foto']))     $tm['photo']    = $cfgTim[$idx]['foto'];
+      if (!empty($cfgTim[$idx]['jabatan']))  $tm['position'] = $cfgTim[$idx]['jabatan'];
     }
     unset($tm);
 

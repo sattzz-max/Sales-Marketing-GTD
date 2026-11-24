@@ -31,4 +31,11 @@ return [
     'email'    => 'stephanie.tan@tamandayu.com',
     'foto'     => 'assets/images/team/team-04.jpg',
   ],
+  [
+    'nama'     => 'Nadia Salsabila',
+    'jabatan'  => 'Resort Staycation & Banquet Specialist',
+    'whatsapp' => '081234567894',
+    'email'    => 'nadia.salsabila@tamandayu.com',
+    'foto'     => 'assets/images/team/team-05.jpg',
+  ],
 ];
